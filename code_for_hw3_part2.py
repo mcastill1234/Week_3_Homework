@@ -300,8 +300,8 @@ def auto_data_and_labels(auto_data, features):
     std = {f: std_vals(auto_data, f) for (f, phi) in features if phi == standard}
     entries = {f: list(set([entry[f] for entry in auto_data])) \
                for (f, phi) in features if phi == one_hot}
-    print('avg and std', std)
-    print('entries in one_hot field', entries)
+    # print('avg and std', std)
+    # print('entries in one_hot field', entries)
     vals = []
     for entry in auto_data:
         phis = []

@@ -23,7 +23,7 @@ features = [('cylinders', hw3.raw),
 
 # Construct the standard data and label arrays
 auto_data, auto_labels = hw3.auto_data_and_labels(auto_data_all, features)
-print('auto data and labels shape', auto_data.shape, auto_labels.shape)
+# print('auto data and labels shape', auto_data.shape, auto_labels.shape)
 
 if False:  # set to True to see histograms
     import matplotlib.pyplot as plt
@@ -76,6 +76,10 @@ print('review_bow_data and labels shape', review_bow_data.shape, review_labels.s
 # -------------------------------------------------------------------------------
 
 # Your code here to process the review data
+learner_score3 = hw3.xval_learning_alg(hw3.perceptron, review_bow_data, review_labels, 10, params={'T': 10})
+print("Perceptron score: ", learner_score3)
+learner_score4 = hw3.xval_learning_alg(hw3.averaged_perceptron, review_bow_data, review_labels, 10, params={'T': 10})
+print("Averaged perceptron score: ", learner_score4)
 
 # -------------------------------------------------------------------------------
 # MNIST Data
