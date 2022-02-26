@@ -2,9 +2,9 @@ import pdb
 import numpy as np
 import code_for_hw3_part2 as hw3
 
-#-------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------
 # Auto Data
-#-------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------
 
 # Returns a list of dictionaries.  Keys are the column names, including mpg.
 auto_data_all = hw3.load_auto_data('auto-mpg.tsv')
@@ -25,29 +25,36 @@ features = [('cylinders', hw3.raw),
 auto_data, auto_labels = hw3.auto_data_and_labels(auto_data_all, features)
 print('auto data and labels shape', auto_data.shape, auto_labels.shape)
 
-if False:                               # set to True to see histograms
+if False:  # set to True to see histograms
     import matplotlib.pyplot as plt
+
     for feat in range(auto_data.shape[0]):
         print('Feature', feat, features[feat][0])
         # Plot histograms in one window, different colors
-        plt.hist(auto_data[feat,auto_labels[0,:] > 0])
-        plt.hist(auto_data[feat,auto_labels[0,:] < 0])
+        plt.hist(auto_data[feat, auto_labels[0, :] > 0])
+        plt.hist(auto_data[feat, auto_labels[0, :] < 0])
         plt.show()
         # Plot histograms in two windows, different colors
-        fig,(a1,a2) = plt.subplots(nrows=2)
-        a1.hist(auto_data[feat,auto_labels[0,:] > 0])
-        a2.hist(auto_data[feat,auto_labels[0,:] < 0])
+        fig, (a1, a2) = plt.subplots(nrows=2)
+        a1.hist(auto_data[feat, auto_labels[0, :] > 0])
+        a2.hist(auto_data[feat, auto_labels[0, :] < 0])
         plt.show()
 
-#-------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------
 # Analyze auto data
-#-------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------
 
 # Your code here to process the auto data
+# See 4_Evaluating_Choices_AutoData.py for full solution to problem 4
+# learner_score1 = hw3.xval_learning_alg(hw3.perceptron, auto_data, auto_labels, 10, params={'T': 1})
+# print("Perceptron score: ", learner_score1)
+# learner_score2 = hw3.xval_learning_alg(hw3.averaged_perceptron, auto_data, auto_labels, 10, params={'T': 1})
+# print("Averaged perceptron score: ", learner_score2)
 
-#-------------------------------------------------------------------------------
+
+# -------------------------------------------------------------------------------
 # Review Data
-#-------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------
 
 # Returns lists of dictionaries.  Keys are the column names, 'sentiment' and 'text'.
 # The train data has 10,000 examples
@@ -64,15 +71,15 @@ review_bow_data = hw3.extract_bow_feature_vectors(review_texts, dictionary)
 review_labels = hw3.rv(review_label_list)
 print('review_bow_data and labels shape', review_bow_data.shape, review_labels.shape)
 
-#-------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------
 # Analyze review data
-#-------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------
 
 # Your code here to process the review data
 
-#-------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------
 # MNIST Data
-#-------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------
 
 """
 Returns a dictionary formatted as follows:
@@ -95,13 +102,14 @@ print('mnist_data_all loaded. shape of single images is', mnist_data_all[0]["ima
 # HINT: change the [0] and [1] if you want to access different images
 d0 = mnist_data_all[0]["images"]
 d1 = mnist_data_all[1]["images"]
-y0 = np.repeat(-1, len(d0)).reshape(1,-1)
-y1 = np.repeat(1, len(d1)).reshape(1,-1)
+y0 = np.repeat(-1, len(d0)).reshape(1, -1)
+y1 = np.repeat(1, len(d1)).reshape(1, -1)
 
 # data goes into the feature computation functions
 data = np.vstack((d0, d1))
 # labels can directly go into the perceptron algorithm
 labels = np.vstack((y0.T, y1.T)).T
+
 
 def raw_mnist_features(x):
     """
@@ -109,6 +117,7 @@ def raw_mnist_features(x):
     @return (m*n,n_samples) reshaped array where each entry is preserved
     """
     raise Exception("implement me!")
+
 
 def row_average_features(x):
     """
@@ -142,12 +151,12 @@ def top_bottom_features(x):
     """
     raise Exception("modify me!")
 
-# use this function to evaluate accuracy
-acc = hw3.get_classification_accuracy(raw_mnist_features(data), labels)
 
-#-------------------------------------------------------------------------------
+# use this function to evaluate accuracy
+# acc = hw3.get_classification_accuracy(raw_mnist_features(data), labels)
+
+# -------------------------------------------------------------------------------
 # Analyze MNIST data
-#-------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------
 
 # Your code here to process the MNIST data
-

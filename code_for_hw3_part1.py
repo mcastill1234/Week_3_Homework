@@ -7,7 +7,7 @@ import itertools
 import operator
 import functools
 
-print("Importing code_for_hw03")
+# print("Importing code_for_hw03")
 
 
 ######################################################################
@@ -252,8 +252,7 @@ def make_polynomial_feature_fun(order):
         for j in range(n):
             features = []
             for o in range(order + 1):
-                indexTuples = \
-                    itertools.combinations_with_replacement(range(d), o)
+                indexTuples = itertools.combinations_with_replacement(range(d), o)
                 for it in indexTuples:
                     features.append(mul(raw_features[i, j] for i in it))
             result.append(cv(features))
@@ -312,12 +311,12 @@ def test_one_hot(sub):
 
 
 # -----------------------------------------------------------------------------
-print("Imported tidy_plot, plot_separator, plot_data, plot_nonlin_sep, cv, rv, y, positive, score")
-print("Datasets: super_simple_separable_through_origin(), super_simple_separable(), xor(), xor_more()")
-print("Tests for part 2: test_linear_classifier_with_features, mul, make_polynomial_feature_fun, ")
-print("                  test_with_features")
-print("Also loaded: perceptron, one_hot_internal, test_one_hot")
+# print("Imported tidy_plot, plot_separator, plot_data, plot_nonlin_sep, cv, rv, y, positive, score")
+# print("Datasets: super_simple_separable_through_origin(), super_simple_separable(), xor(), xor_more()")
+# print("Tests for part 2: test_linear_classifier_with_features, mul, make_polynomial_feature_fun, ")
+# print("                  test_with_features")
+# print("Also loaded: perceptron, one_hot_internal, test_one_hot")
 
 ######################################################################
 #   Example for part 3B) test_with_features()
-# test_with_features(super_simple_separable, 2, draw=True, pause=True)
+test_with_features(xor_more, 3, draw=True, pause=True)

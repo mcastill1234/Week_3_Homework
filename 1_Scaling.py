@@ -1,5 +1,3 @@
-import mglearn
-import matplotlib.pyplot as plt
 import numpy as np
 import HyperplaneProcedures as hp
 
