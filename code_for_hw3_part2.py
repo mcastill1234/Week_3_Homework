@@ -429,11 +429,7 @@ def load_mnist_data(labels):
     for label in labels:
         images = load_mnist_single("mnist/mnist_train{}.png".format(label))
         y = np.array([[label] * len(images)])
-        data[label] = {
-            "images": images,
-            "labels": y
-        }
-
+        data[label] = {"images": images, "labels": y}
     return data
 
 

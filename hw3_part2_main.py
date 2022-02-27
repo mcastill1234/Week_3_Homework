@@ -1,6 +1,7 @@
 import pdb
 import numpy as np
 import code_for_hw3_part2 as hw3
+from HyperplaneProcedures import cv
 
 # -------------------------------------------------------------------------------
 # Auto Data
@@ -45,7 +46,7 @@ if False:  # set to True to see histograms
 # -------------------------------------------------------------------------------
 
 # Your code here to process the auto data
-# See 4_Evaluating_Choices_AutoData.py for full solution to problem 4
+# See 4_Evaluating_Features_AutoData.py for full solution to problem 4
 # learner_score1 = hw3.xval_learning_alg(hw3.perceptron, auto_data, auto_labels, 10, params={'T': 1})
 # print("Perceptron score: ", learner_score1)
 # learner_score2 = hw3.xval_learning_alg(hw3.averaged_perceptron, auto_data, auto_labels, 10, params={'T': 1})
@@ -58,28 +59,28 @@ if False:  # set to True to see histograms
 
 # Returns lists of dictionaries.  Keys are the column names, 'sentiment' and 'text'.
 # The train data has 10,000 examples
-review_data = hw3.load_review_data('reviews.tsv')
+# review_data = hw3.load_review_data('reviews.tsv')
 
 # Lists texts of reviews and list of labels (1 or -1)
-review_texts, review_label_list = zip(*((sample['text'], sample['sentiment']) for sample in review_data))
+# review_texts, review_label_list = zip(*((sample['text'], sample['sentiment']) for sample in review_data))
 
 # The dictionary of all the words for "bag of words"
-dictionary = hw3.bag_of_words(review_texts)
+# dictionary = hw3.bag_of_words(review_texts)
 
 # The standard data arrays for the bag of words
-review_bow_data = hw3.extract_bow_feature_vectors(review_texts, dictionary)
-review_labels = hw3.rv(review_label_list)
-print('review_bow_data and labels shape', review_bow_data.shape, review_labels.shape)
+# review_bow_data = hw3.extract_bow_feature_vectors(review_texts, dictionary)
+# review_labels = hw3.rv(review_label_list)
+# print('review_bow_data and labels shape', review_bow_data.shape, review_labels.shape)
 
 # -------------------------------------------------------------------------------
 # Analyze review data
 # -------------------------------------------------------------------------------
 
 # Your code here to process the review data
-learner_score3 = hw3.xval_learning_alg(hw3.perceptron, review_bow_data, review_labels, 10, params={'T': 10})
-print("Perceptron score: ", learner_score3)
-learner_score4 = hw3.xval_learning_alg(hw3.averaged_perceptron, review_bow_data, review_labels, 10, params={'T': 10})
-print("Averaged perceptron score: ", learner_score4)
+# learner_score3 = hw3.xval_learning_alg(hw3.perceptron, review_bow_data, review_labels, 10, params={'T': 10})
+# print("Perceptron score: ", learner_score3)
+# learner_score4 = hw3.xval_learning_alg(hw3.averaged_perceptron, review_bow_data, review_labels, 10, params={'T': 10})
+# print("Averaged perceptron score: ", learner_score4)
 
 # -------------------------------------------------------------------------------
 # MNIST Data
@@ -126,34 +127,36 @@ def raw_mnist_features(x):
 def row_average_features(x):
     """
     This should either use or modify your code from the tutor questions.
-
+    TODO: Update this specification or implementation to consider n_samples
     @param x (n_samples,m,n) array with values in (0,1)
     @return (m,n_samples) array where each entry is the average of a row
     """
-    raise Exception("modify me!")
+    return np.mean(x, axis=1, keepdims=True)
 
 
 def col_average_features(x):
     """
     This should either use or modify your code from the tutor questions.
-
+    TODO: Update this specification or implementation to consider n_samples
     @param x (n_samples,m,n) array with values in (0,1)
     @return (n,n_samples) array where each entry is the average of a column
     """
-    raise Exception("modify me!")
+    return np.mean(x, axis=0, keepdims=True).T
 
 
 def top_bottom_features(x):
     """
     This should either use or modify your code from the tutor questions.
-
+    TODO: Update this specification or implementation to consider n_samples
     @param x (n_samples,m,n) array with values in (0,1)
     @return (2,n_samples) array where the first entry of each column is the average of the
     top half of the image = rows 0 to floor(m/2) [exclusive]
     and the second entry is the average of the bottom half of the image
     = rows floor(m/2) [inclusive] to m
     """
-    raise Exception("modify me!")
+    m = x.shape[0]
+    return cv([np.mean(x[:m//2, ]), np.mean(x[m//2:, ])])
+
 
 
 # use this function to evaluate accuracy
